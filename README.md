@@ -36,4 +36,15 @@ but its not an elegant solution
  x1, y1 for starting copordinate and x2,x2 along with stroke nad stroke-width params
 
  There is no z-index so we cannot arrange the elements who should overlap what 
+
+ <path>-> This is robust and allows custom draws 
+
  
+D3
+
+size -> large -> 542Kb(original) 262Kb(Min) we can use single operations package 
+we can pick and choose if we need only few packages
+
+
+Selections
+document.querySelector(")  -> d3.select (It helps to refernce dom elements)
