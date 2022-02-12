@@ -17,3 +17,23 @@ SVG are images using equations and generated / manipulated using codes
 Simply put svgs are easily scalable
 Issue with SVG is its resouce intensive
 
+SVG dodnot use backgroug properties
+use fill property
+stroke for border
+sroke-width -> for giving border width
+
+
+all svg tags are auto closable and wont coplain if explicit s=closure tags are used
+<rect> -> width and height   fill -= to add backgroung color stroke to add borger color and stroke-width to add border width
+additionally x and y coordinates can be added tro place it anywhere inside the window dom not necessarily inside svg block 
+we can give overflow="visible" to show overrlapping pixels 
+but its not an elegant solution
+
+<circle>
+ takes same  stroke and stroke border , additionally for denoting radius of circle we need to give r attribute & instead fo x and y we use cx and cy
+
+ <line> 
+ x1, y1 for starting copordinate and x2,x2 along with stroke nad stroke-width params
+
+ There is no z-index so we cannot arrange the elements who should overlap what 
+ 
