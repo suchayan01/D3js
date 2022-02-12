@@ -1,12 +1,76 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
+<meta charset="utf-8" />
+<title>Fork of Tree Fractal</title>
+<body style="position: fixed; left: 0px; right: 0px; top: 0px; bottom: 0px">
+  <canvas id="canvas"></canvas>
+  <script>
+    // Accommodate high resolution screens.
+    // Draws from
+    // https://html5rocks.com/en/tutorials/canvas/hidpi/
+    // https://www.kirupa.com/canvas/canvas_high_dpi_retina.htm
+    const dpr = window.devicePixelRatio || 1;
+
+    const canvas = document.getElementById('canvas');
+
+    const width = document.body.clientWidth;
+    const height = document.body.clientHeight;
+
+    canvas.width = width * dpr;
+    canvas.height = height * dpr;
+    // scale everything down using CSS
+    canvas.style.width = width + 'px';
+    canvas.style.height = height + 'px';
+
+    const c = canvas.getContext('2d');
+    c.scale(dpr, dpr);
+
+    const centerX = width / 2;
+
+    const trunkHeight = 100;
+    const branchingDepth = 11;
+    let branchLengthRatio = 0.8;
+    let branchAngleDifference = 0.27;
+
+    const drawTree = (x1, y1, x2, y2, branchLength, branchAngle, depth) => {
+      if (depth == 0) {
+        return;
+      }
+      c.beginPath();
+      c.moveTo(x1, y1);
+      c.lineTo(x2, y2);
+      c.closePath();
+      c.stroke();
+
+      branchLength *= branchLengthRatio;
+
+      function branch(angle) {
+        const branchX2 = x2 + branchLength * Math.cos(angle);
+        const branchY2 = y2 + branchLength * Math.sin(angle);
+        drawTree(x2, y2, branchX2, branchY2, branchLength, angle, depth - 1);
+      }
+
+      // Right branch
+      branch(branchAngle + branchAngleDifference);
+
+      // Left branch
+      branch(branchAngle - branchAngleDifference);
+    };
+
+    const redrawTree = () => {
+      c.clearRect(0, 0, width, height);
+      const x1 = centerX;
+      const y1 = height;
+      const x2 = centerX;
+      const y2 = height - trunkHeight;
+      drawTree(x1, y1, x2, y2, trunkHeight, -Math.PI / 2, branchingDepth);
+    };
+
+    canvas.addEventListener('mousemove', (e) => {
+      branchLengthRatio = (e.x / width) * 1.5;
+      branchAngleDifference = (e.y / height) * Math.PI;
+      redrawTree();
+    });
+
+    redrawTree();
+  </script>
 </body>
-</html>

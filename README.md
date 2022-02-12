@@ -9,3 +9,11 @@ be able to make HTTP requests unless we have a server
 3. D3.js helps in data visualization
 4. Before we visualize some questions we get to know audeience 
 5. appropriate visualization techniques has to be choosen
+
+what is SVG?
+Scalable Vector Graphics
+D3 uses SVG to draw graphs
+SVG are images using equations and generated / manipulated using codes
+Simply put svgs are easily scalable
+Issue with SVG is its resouce intensive
+
